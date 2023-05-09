@@ -17,9 +17,4 @@ variable "state_storage_account_name" {
   type        = string                              
   description = "name of the app"                   
   default     = "statestoresa"                      
-}                                                   
-#variable "resource_group_location" {               
-#  type        = string                             
-#  default     = "eastus"                           
-#  description = "Location of the resource group."  
-#}                                                  
+}                                               
