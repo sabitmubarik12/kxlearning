@@ -2,7 +2,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-#some-chaning
+
 name: On Release Main
 
 jobs:
@@ -28,7 +28,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
-
+      - name: Checking secrets
+        run: echo $ARM_CLIENT_ID
+        
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
