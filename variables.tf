@@ -18,8 +18,8 @@ variable "state_storage_account_name" {
   description = "name of the app"
   default     = "statestoresa"
 }
-variable "resource_group_location" {
-  type        = string
-  default     = "eastus"
-  description = "Location of the resource group."
-}
+#variable "resource_group_location" {
+#  type        = string
+#  default     = "eastus"
+#  description = "Location of the resource group."
+#}
