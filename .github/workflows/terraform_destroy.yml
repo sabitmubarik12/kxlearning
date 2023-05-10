@@ -1,0 +1,25 @@
+name: Deploy Terraform Resources
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 'Destroy Terraform resources'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform destroy
+        id: destroy
+        run: terraform destroy -no-color
