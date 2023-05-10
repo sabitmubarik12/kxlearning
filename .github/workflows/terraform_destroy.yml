@@ -1,24 +1,29 @@
-name: Deploy Terraform Resources
+name: Terraform Destroy
 on:
-  workflow_dispatch:
+ workflow_dispatch:
 
 jobs:
-  deploy:
-    name: 'Destroy Terraform resources'
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-
-    steps:
+ tf-destroy:
+   runs-on: ubuntu-latest
+   env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-west-1'
+   steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Setup Terraform                                                                      
+        uses: hashicorp/setup-terraform@v1
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
+      - name: Terraform Init
+        id: init
+        run: terraform init  
+        
+      - name: Show Destroy plan
+        run: terraform plan -destroy
+        continue-on-error: true
+
       - name: Terraform destroy
         id: destroy
         run: terraform destroy -auto-approve
