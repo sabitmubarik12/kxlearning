@@ -31,7 +31,9 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt -check || true
+        run: |
+          terraform fmt -check
+          echo '::set-output name=bash_return_Value::$?'
 
       - name: Terraform init
         id: init
