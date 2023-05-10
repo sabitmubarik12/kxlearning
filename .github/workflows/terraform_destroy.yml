@@ -19,8 +19,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
-      - name: Download State file
-        run: az storage blob download -f terraform-base.tfstate -c tfstate --account-name lndserviceaccount -n terraform-base.tfstate
       - name: Terraform destroy
         id: destroy
-        run: terraform destroy -no-color
+        run: terraform destroy -auto-approve
