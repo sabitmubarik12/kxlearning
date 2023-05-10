@@ -4,11 +4,9 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "${var.state_resource_group_namename}"
-    storage_account_name = "${var.state_storage_account_name}"
+    resource_group_name  = "statestorerg"
+    storage_account_name = "statestoresa"
     container_name       = "tfstate"
     key                  = "terraform-base.tfstate"
   }
 }
-
-data "azurerm_client_config" "current" {}
